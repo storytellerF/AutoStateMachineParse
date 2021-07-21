@@ -9,7 +9,7 @@ public class Simple {
 
         ExcelRead excelRead = new ExcelRead(path);
         HashMap<String, List<String>> read = excelRead.read(8, 7);
-        Output output = Factory.get();
+        Output output = Factory.get("JavaScript");
         String output1 = output.output(read);
         System.out.println(output1);
     }
