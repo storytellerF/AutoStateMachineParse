@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Test {
     @org.junit.jupiter.api.Test
-    public void testOds() {
+    public void testOds() throws Exception {
         String path="C:\\Users\\faber\\Documents\\test.ods";
         ExcelRead excelRead=new ExcelRead(path);
-        HashMap<String, List<String>> read = excelRead.read(8, 7);
+        HashMap<String, List<String>> read = excelRead.read(8, 7,0);
         System.out.println(read.size());
     }
 }

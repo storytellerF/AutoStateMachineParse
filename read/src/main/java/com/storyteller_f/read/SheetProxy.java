@@ -18,7 +18,7 @@ public class SheetProxy implements Sheet {
     }
 
     @Override
-    public Row createRow(int rownum) {
+    public Row createRow(int rowNum) {
         return null;
     }
 
@@ -28,8 +28,8 @@ public class SheetProxy implements Sheet {
     }
 
     @Override
-    public Row getRow(int rownum) {
-        return new RowProxy(table.getRowByIndex(rownum));
+    public Row getRow(int rowNum) {
+        return new RowProxy(table.getRowByIndex(rowNum));
     }
 
     @Override
@@ -509,7 +509,7 @@ public class SheetProxy implements Sheet {
 
     @Override
     public String getSheetName() {
-        return null;
+        return table.getTableName();
     }
 
     @Override
@@ -609,6 +609,17 @@ public class SheetProxy implements Sheet {
 
     @Override
     public Iterator<Row> iterator() {
-        return null;
+        return new Iterator<Row>() {
+            int index=0;
+            @Override
+            public boolean hasNext() {
+                return index<table.getRowCount();
+            }
+
+            @Override
+            public Row next() {
+                return new RowProxy(table.getRowByIndex(index++));
+            }
+        };
     }
 }

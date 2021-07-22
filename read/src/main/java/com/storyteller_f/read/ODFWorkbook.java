@@ -5,7 +5,6 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.*;
 import org.odftoolkit.simple.Document;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +37,7 @@ public class ODFWorkbook implements Workbook {
     }
 
     @Override
-    public void setSheetOrder(String sheetname, int pos) {
+    public void setSheetOrder(String sheetName, int pos) {
 
     }
 
@@ -54,7 +53,7 @@ public class ODFWorkbook implements Workbook {
 
     @Override
     public String getSheetName(int sheet) {
-        return null;
+        return getSheetAt(sheet).getSheetName();
     }
 
     @Override
@@ -73,7 +72,7 @@ public class ODFWorkbook implements Workbook {
     }
 
     @Override
-    public Sheet createSheet(String sheetname) {
+    public Sheet createSheet(String sheetName) {
         return null;
     }
 
@@ -153,12 +152,12 @@ public class ODFWorkbook implements Workbook {
     }
 
     @Override
-    public void write(OutputStream stream) throws IOException {
+    public void write(OutputStream stream) {
 
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
 
     }
 
@@ -303,7 +302,7 @@ public class ODFWorkbook implements Workbook {
     }
 
     @Override
-    public void addToolPack(UDFFinder toopack) {
+    public void addToolPack(UDFFinder toolPack) {
 
     }
 
@@ -323,12 +322,23 @@ public class ODFWorkbook implements Workbook {
     }
 
     @Override
-    public int addOlePackage(byte[] oleData, String label, String fileName, String command) throws IOException {
+    public int addOlePackage(byte[] oleData, String label, String fileName, String command) {
         return 0;
     }
 
     @Override
     public Iterator<Sheet> iterator() {
-        return null;
+        return new Iterator<Sheet>() {
+            int index=0;
+            @Override
+            public boolean hasNext() {
+                return index<getNumberOfSheets();
+            }
+
+            @Override
+            public Sheet next() {
+                return new SheetProxy(document.getTableList().get(index++));
+            }
+        };
     }
 }

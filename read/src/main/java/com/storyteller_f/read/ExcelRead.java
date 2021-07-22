@@ -40,29 +40,38 @@ public class ExcelRead extends Read {
     }
 
     @Override
-    public HashMap<String, List<String>> read(int row, int col) {
+    public HashMap<String, List<String>> read(int row, int col, int sheetIndex) throws Exception {
         HashMap<String, List<String>> hashMap = new HashMap<>();
-        try {
-            Workbook workbook = get(path);
-            if (workbook == null) return null;
-            Sheet sheetAt = workbook.getSheetAt(0);
-            for (int i = 1; i < row; i++) {
-                List<String> list = new ArrayList<>();
-                Row rowByIndex = sheetAt.getRow(i);
-                for (int i1 = 1; i1 < col; i1++) {
-                    org.apache.poi.ss.usermodel.Cell cellByIndex = rowByIndex.getCell(i1);
-                    list.add(cellByIndex.getStringCellValue());
-                }
-                Cell cellByIndex = rowByIndex.getCell(0);
-                String key = cellByIndex.getStringCellValue();
-                System.out.println(key);
-                hashMap.put(key, list);
+        Workbook workbook = get(path);
+        if (workbook == null) return null;
+        Sheet sheetAt = workbook.getSheetAt(sheetIndex);
+        for (int i = 1; i < row; i++) {
+            List<String> list = new ArrayList<>();
+            Row rowByIndex = sheetAt.getRow(i);
+            for (int i1 = 1; i1 < col; i1++) {
+                org.apache.poi.ss.usermodel.Cell cellByIndex = rowByIndex.getCell(i1);
+                list.add(cellByIndex.getStringCellValue());
             }
-            return hashMap;
-        } catch (Exception e) {
-            e.printStackTrace();
+            Cell cellByIndex = rowByIndex.getCell(0);
+            String key = cellByIndex.getStringCellValue();
+            System.out.println(key);
+            hashMap.put(key, list);
         }
-        return null;
+        return hashMap;
+    }
+
+    @Override
+    public List<String> allSheets() throws Exception {
+        ArrayList<String> strings = new ArrayList<>();
+        Workbook workbook = get(path);
+        if (workbook==null) {
+            return strings;
+        }
+        int numberOfSheets = workbook.getNumberOfSheets();
+        for (int i = 0; i < numberOfSheets; i++) {
+            strings.add(workbook.getSheetName(i));
+        }
+        return strings;
     }
 
 }
