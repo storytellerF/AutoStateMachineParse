@@ -15,7 +15,7 @@ public class JavaScriptOutput implements Output{
             }
             array.deleteCharAt(array.length()-1);
             array.append("]");
-            stringBuilder.append("map.set(\"").append(string).append("\",").append(array).append(";\n");
+            stringBuilder.append("map.set(\"").append(string).append("\",").append(array).append(");\n");
         }
         return stringBuilder.toString();
     }
