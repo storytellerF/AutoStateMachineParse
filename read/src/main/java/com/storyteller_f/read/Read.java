@@ -10,7 +10,7 @@ public abstract class Read {
         this.path = path;
     }
 
-    public abstract HashMap<String, List<String>> read(int row,int col,int sheetIndex) throws Exception;
+    public abstract HashMap<String, List<String>> read(int row, int col, int sheetIndex) throws Exception;
 
     public abstract List<String> allSheets() throws Exception;
 }

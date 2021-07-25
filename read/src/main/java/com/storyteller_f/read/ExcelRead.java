@@ -1,5 +1,7 @@
 package com.storyteller_f.read;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,7 +22,7 @@ public class ExcelRead extends Read {
     public ExcelRead(String path) {
         super(path);
     }
-
+    @Nullable
     public static Workbook get(String path) throws Exception {
         int i = path.lastIndexOf(".");
         if (i > 0) {
@@ -61,6 +63,7 @@ public class ExcelRead extends Read {
     }
 
     @Override
+    @NotNull
     public List<String> allSheets() throws Exception {
         ArrayList<String> strings = new ArrayList<>();
         Workbook workbook = get(path);

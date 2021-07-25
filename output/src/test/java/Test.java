@@ -10,7 +10,7 @@ public class Test {
         List<String> list=new ArrayList<>(Arrays.asList("start","singed","整数"));
 
         hashMap.put("start",list);
-        Output javaScriptOutput=new JavaOutput();
+        Output javaScriptOutput=new PythonOutput();
         String output = javaScriptOutput.output(hashMap);
         System.out.println(output);
     }
