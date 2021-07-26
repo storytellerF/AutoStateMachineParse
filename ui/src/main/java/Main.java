@@ -1,11 +1,11 @@
 import com.storyteller_f.read.ExcelRead;
 import com.storyteller_f.read.Read;
+import com.storyteller_f.asmp.output.map.MapFactory;
+import com.storyteller_f.asmp.output.map.Output;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class Main {
     private JComboBox<String> comboBoxSheetName;
 
     public Main() {
-        List<String> type = Factory.type();
+        List<String> type = new MapFactory().type();
         for (String s : type) {
             comboBox1.addItem(s);
         }
@@ -36,7 +36,7 @@ public class Main {
             HashMap<String, List<String>> read;
             try {
                 read = excelRead.read(row, col, comboBoxSheetName.getSelectedIndex());
-                Output output = Factory.get(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
+                Output output = new MapFactory().get(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
                 String output1 = output.output(read);
                 System.out.println(output1);
             } catch (Exception exception) {

@@ -1,3 +1,5 @@
+package com.storyteller_f.asmp.output.map;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,5 +12,14 @@ public interface Output {
         list.deleteCharAt(list.length() - 1);
         return list;
     }
+    default StringBuilder getEnum(List<String> list1) {
+        StringBuilder list=new StringBuilder();
+        for (String s : list1) {
+            list.append(s).append(",");
+        }
+        list.deleteCharAt(list.length() - 1);
+        return list;
+    }
+
     String output(HashMap<String, List<String>> data);
 }
