@@ -12,7 +12,7 @@ public class COutput implements Output {
         for (String s : data.keySet()) {
             enumStringBuilder.append(s).append(", ");
         }
-        StringBuilder result = new StringBuilder(String.format("char com.storyteller_f.asmp.output.map[%d][%d]={\n",data.size(),data.get(data.keySet().iterator().next()).size()));
+        StringBuilder result = new StringBuilder(String.format("char map[%d][%d]={\n",data.size(),data.get(data.keySet().iterator().next()).size()));
         if (enumStringBuilder.length() > 0) {
             enumStringBuilder.delete(enumStringBuilder.length()-2,enumStringBuilder.length());
         }
