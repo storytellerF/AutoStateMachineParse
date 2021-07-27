@@ -12,7 +12,7 @@ public class Test {
         HashMap<String,List<String>> hashMap=new HashMap<>();
         List<String> list=new ArrayList<>(Arrays.asList("start","singed","整数"));
         hashMap.put("start",list);
-        Output javaScriptOutput = new MapFactory().get("CPP");
+        Output javaScriptOutput = new MapFactory().get("Go");
         String output = javaScriptOutput.output(hashMap);
         System.out.println(output);
     }
