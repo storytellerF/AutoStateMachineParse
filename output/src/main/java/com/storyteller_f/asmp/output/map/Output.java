@@ -12,6 +12,10 @@ public interface Output {
         list.deleteCharAt(list.length() - 1);
         return list;
     }
+
+    default String getKey(String k) {
+        return "\""+k+"\"";
+    }
     default StringBuilder getEnum(List<String> list1) {
         StringBuilder list=new StringBuilder();
         for (String s : list1) {
