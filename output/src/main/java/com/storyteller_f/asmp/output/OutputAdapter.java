@@ -11,7 +11,7 @@ public abstract class OutputAdapter implements Output {
         String header = onHeader();
         StringBuilder stringBuilder = new StringBuilder(header);
         for (String s : data.keySet()) {
-            stringBuilder.append(onContent(s, data.get(s))).append("\n");
+            stringBuilder.append("\t").append(onContent(s, data.get(s))).append("\n");
         }
         int delete = delete();
         if (delete > 0) {
@@ -21,11 +21,29 @@ public abstract class OutputAdapter implements Output {
         return stringBuilder.toString();
     }
 
+    /**
+     * 不需要在尾部添加换行
+     * @return
+     */
     protected abstract String onEnd();
 
-    protected abstract String onContent(String s, List<String> strings);
+    /**
+     * 不需要自行添加制表符
+     * @param stateName 状态名称
+     * @param list 状态列表
+     * @return
+     */
+    protected abstract String onContent(String stateName, List<String> list);
 
+    /**
+     * 需要根据情况自行添加换行
+     * @return 需要添加在头部的信息
+     */
     protected abstract String onHeader();
 
+    /**
+     * 需要移除多少个字符
+     * @return 字符个数
+     */
     public abstract int delete();
 }
